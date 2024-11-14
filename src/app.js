@@ -12,6 +12,7 @@ import clientesMedRoutes from './routes/clientesMed.routes.js'
 import trabajadoresRoutes from './routes/trabajadores.routes.js'
 import consumosRoutes from './routes/consumos.routes.js'
 import medidoresRoutes from './routes/medidores.routes.js'
+import rutaasignadaRoutes from './routes/rutaasignada.routes.js'
 
 //definir modulo de ES
 const __filename = fileURLToPath(import.meta.url);
@@ -43,6 +44,7 @@ app.use('/api',clientesMedRoutes)
 app.use('/api',trabajadoresRoutes)
 app.use('/api',consumosRoutes)
 app.use('/api',medidoresRoutes)
+app.use('/api',rutaasignadaRoutes)
 
 app.use((req,res,next)=>{
     res.status(400).json({
