@@ -24,6 +24,25 @@ async (req,res)=>{
         return res.status(500).json({message:'error de lado del servidor'})        
     }
 }
+
+export const getmedidorxcedula = 
+async (req, res) => {
+    try {
+        const { cedula } = req.params;
+        console.log("Buscando medidor para cliente con cédula:", cedula); // Log para verificar la cédula recibida
+        const [result] = await conmysql.query('SELECT * FROM tb_medidor WHERE cli_cedula = ?', [cedula]);
+        if (result.length === 0) {
+            console.log("No se encontró medidor para la cédula:", cedula); // Log para casos sin resultados
+            return res.status(404).json({ message: "No se encontró un medidor para el cliente con esa cédula" });
+        }
+        console.log("Medidor encontrado:", result[0]); // Log para verificar el resultado obtenido
+        res.json(result[0]);
+    } catch (error) {
+        console.error("Error al buscar medidor por cédula:", error); // Log para errores
+        return res.status(500).json({ message: "Error del lado del servidor" });
+    }
+};
+
 export const postMedidor=
 async (req,res)=>{
     try {
