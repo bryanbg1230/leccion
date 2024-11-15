@@ -2,6 +2,7 @@ import { Router } from "express";
 import {
     getMedidores, 
     getmedidoresxid,
+    getmedidorxcedula,
     postMedidor,
     putMedidor,
     patchMedidor,
@@ -12,6 +13,7 @@ const router=Router()
 
 router.get('/medidores', getMedidores)  //select
 router.get('/medidores/:id',getmedidoresxid)  //select x id
+router.get('/medidores/cedula/:cedula', getmedidorxcedula);  //select x cedula
 router.post('/medidores',postMedidor)  //insert
 router.put('/medidores/:id',putMedidor)  //update
 router.patch('/medidores/:id',patchMedidor)  //update
