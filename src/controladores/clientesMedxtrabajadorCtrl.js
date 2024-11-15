@@ -1,4 +1,4 @@
-import Cliente from '../controladores/clientesMedCtrl.js';  // Modelo de cliente
+import { getClientesMed, getclientesMedxid } from '../controladores/clientesMedCtrl.js';  // Modelo de cliente
 import Medidor from '../controladores/medidoresCtrl.js';  // Modelo de medidor
 import RutaAsignada from '../controladores/rutaasignadaCtrl.js';  // Modelo de ruta asignada
 
