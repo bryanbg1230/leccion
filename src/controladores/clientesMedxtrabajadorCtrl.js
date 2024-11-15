@@ -1,6 +1,6 @@
 import { conmysql } from '../db.js';
 
-export const getClientesxTrabajador = async (req, res) => {
+export const getclientesxtrabajador = async (req, res) => {
     try {
         const { tra_cedula } = req.params;
 
