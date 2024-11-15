@@ -5,6 +5,6 @@ import {
 const router=Router()
 //armar nuestras rutas
 
-router.get('/trabajadores/:cedula',getclientesxtrabajador)  //select x id
+router.get('/trabajadoresxced/:cedula',getclientesxtrabajador)  //select x id
 
 export default router
