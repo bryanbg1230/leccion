@@ -1,33 +1,23 @@
-import { getClientesMed, getclientesMedxid } from '../controladores/clientesMedCtrl.js';  // Modelo de cliente
-import Medidor from '../controladores/medidoresCtrl.js';  // Modelo de medidor
-import RutaAsignada from '../controladores/rutaasignadaCtrl.js';  // Modelo de ruta asignada
+import { conmysql } from '../db.js';
 
+export const getClientesxTrabajador = async (req, res) => {
+    try {
+        const { tra_cedula } = req.params;
 
-export const getclientesxtrabajador = 
-async (req, res) => {
-  try {
-    const { tra_cedula } = req.params;
+        const [result] = await conmysql.query(`
+            SELECT DISTINCT c.cli_cedula, c.cli_nombres, c.cli_apellidos, c.cli_estado
+            FROM tb_cliente AS c
+            JOIN tb_medidor AS m ON c.cli_cedula = m.cli_cedula
+            JOIN tb_rutaasignada AS r ON m.med_id = r.med_id
+            WHERE r.tra_cedula = ? AND c.cli_estado = 'A';`, [tra_cedula]);
 
-    // Obtener los medidores asignados a este trabajador
-    const rutaAsignada = await RutaAsignada.findAll({
-      where: { tra_cedula }
-    });
+        if (result.length === 0) {
+            return res.status(404).json({ message: "No se encontraron clientes asignados a este trabajador." });
+        }
 
-    if (rutaAsignada.length === 0) {
-      return res.status(404).json({ mensaje: 'Este trabajador no tiene medidores asignados.' });
+        res.status(200).json(result);
+    } catch (error) {
+        console.error("Error al consultar clientes por trabajador:", error);
+        return res.status(500).json({ message: "Error del servidor.", error });
     }
-
-    // Obtener las cédulas de los clientes asociados a esos medidores
-    const medidores = await Medidor.findAll({
-      where: { med_id: rutaAsignada.map(r => r.med_id) }
-    });
-
-    const clientes = await Cliente.findAll({
-      where: { cli_cedula: medidores.map(m => m.cli_cedula), cli_estado: 'A' }
-    });
-
-    res.status(200).json(clientes);
-  } catch (error) {
-    res.status(500).json({ mensaje: 'Error al obtener los clientes.', error });
-  }
 };
