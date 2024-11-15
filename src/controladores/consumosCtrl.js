@@ -37,6 +37,7 @@ async (req,res)=>{
             id:rows.insertId
         })
     } catch (error) {
+        console.log("Error al registrar consumo:", error); // Depuración de errores
         return res.status(500).json({message:'error del lado del servidor'})
     }
 }
