@@ -1,6 +1,6 @@
-const Cliente = require('../controladores/clientesMedCtrl');  // Modelo de cliente
-const Medidor = require('../controladores/medidoresCtrl');  // Modelo de medidor
-const RutaAsignada = require('../controladores/rutaasignadaCtrl');  // Modelo de ruta asignada
+import Cliente from '../controladores/clientesMedCtrl.js';  // Modelo de cliente
+import Medidor from '../controladores/medidoresCtrl.js';  // Modelo de medidor
+import RutaAsignada from '../controladores/rutaasignadaCtrl.js';  // Modelo de ruta asignada
 
 
 export const getclientesxtrabajador = 
