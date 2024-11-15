@@ -123,5 +123,3 @@ async(req,res)=>{
         return res.status(500).json({message:"Error del lado del servidor"})
     }
 }
-
-export default Medidor; 
