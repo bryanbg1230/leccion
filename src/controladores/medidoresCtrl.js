@@ -36,7 +36,8 @@ async (req, res) => {
             return res.status(404).json({ message: "No se encontró un medidor para el cliente con esa cédula" });
         }
         console.log("Medidor encontrado:", result[0]); // Log para verificar el resultado obtenido
-        res.json(result[0]);
+        //res.json(result[0]);   devuelve un valor y es el primer valor que devuelve
+        res.json(result[0]);   //devuelve todo lo que este relacionado
     } catch (error) {
         console.error("Error al buscar medidor por cédula:", error); // Log para errores
         return res.status(500).json({ message: "Error del lado del servidor" });
